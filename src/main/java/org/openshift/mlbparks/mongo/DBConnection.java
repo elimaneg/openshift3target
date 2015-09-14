@@ -65,20 +65,20 @@ public class DBConnection {
 	}
 
 	private void initDatabase(DB mongoDB) {
-		DBCollection parkListCollection = mongoDB.getCollection("teams");
-		int teamsImported = 0;
-		if (parkListCollection.count() < 1) {
+		DBCollection storeListCollection = mongoDB.getCollection("stores");
+		int storesImported = 0;
+		if (storeListCollection.count() < 1) {
 			System.out.println("The database is empty.  We need to populate it");
 			try {
 				String currentLine = new String();
 				URL jsonFile = new URL(
-						"https://raw.githubusercontent.com/gshipley/openshift3mlbparks/master/mlbparks.json");
+						"https://raw.githubusercontent.com/gshipley/openshift3target/master/target_stores.json");
 				BufferedReader in = new BufferedReader(new InputStreamReader(jsonFile.openStream()));
 				while ((currentLine = in.readLine()) != null) {
-					parkListCollection.insert((DBObject) JSON.parse(currentLine.toString()));
-					teamsImported++;
+					storeListCollection.insert((DBObject) JSON.parse(currentLine.toString()));
+					storesImported++;
 				}
-				System.out.println("Successfully imported " + teamsImported + " teams.");
+				System.out.println("Successfully imported " + storesImported + " teams.");
 
 			} catch (Exception e) {
 				e.printStackTrace();
