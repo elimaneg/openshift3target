@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Map of MLB Parks</title> 
+  <title>Map of Target Stores</title>
   	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
 	<!--[if lte IE 8]>
     	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
@@ -31,7 +31,7 @@
 	
 </head>
 <body>
-	<h1 id="title">MLB Stadiums on OpenShift 3</h1>
+	<h1 id="title">Target Stores on OpenShift 3</h1>
 	<div id="map"></div>
 	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script> 
 	<script>
@@ -52,7 +52,7 @@
 			$.get(url, pinTheMap, "json")
 		}
 
-		Number.prototype.toCurrencyString = function() { return "$" + Math.floor(this).toLocaleString() + (this % 1).toFixed(2).toLocaleString().replace(/^0/,''); }
+
 		
 		function pinTheMap(data){
 			//clear the current pins
@@ -61,11 +61,9 @@
 			//add the new pins
 			var markerArray = new Array(data.length)
 			for (var i = 0; i < data.length; i++){
-				park = data[i];
-				var popupInformation = "<b>" + park.name + "</b></br>" + park.ballpark + "</br>";
-				popupInformation += "<b>Team Payroll: </b>" + park.payroll.toCurrencyString() + "</br>";
-				popupInformation += "<b>League: </b>" + park.league + "</br>";
-				markerArray[i] = L.marker([park.position[1], park.position[0]]).bindPopup(popupInformation);			
+				store = data[i];
+				var popupInformation = "<b>" + store.name + "</b></br>";
+				markerArray[i] = L.marker([park.position[1], park.position[0]]).bindPopup(popupInformation);
 			}
 			
     		
