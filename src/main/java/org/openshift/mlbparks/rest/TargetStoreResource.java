@@ -35,8 +35,8 @@ public class TargetStoreResource {
 
 	private TargetStore populateStoreInformation(DBObject dataValue) {
 		TargetStore theStore = new TargetStore();
-		theStore.setName(dataValue.get("name"));
-		theStore.setPosition(dataValue.get("coordinates"));
+		theStore.setName(dataValue.get("Name"));
+		theStore.setPosition(dataValue.get("pos"));
 		theStore.setId(dataValue.get("_id").toString());
 
 		return theStore;
@@ -80,7 +80,7 @@ public class TargetStoreResource {
 		BasicDBObject boxQuery = new BasicDBObject();
 		boxQuery.put("$box", boxList);
 
-		spatialQuery.put("coordinates", new BasicDBObject("$within", boxQuery));
+		spatialQuery.put("pos", new BasicDBObject("$within", boxQuery));
 		System.out.println("Using spatial query: " + spatialQuery.toString());
 
 		DBCursor cursor = targetStores.find(spatialQuery);
